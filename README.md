@@ -103,7 +103,7 @@ The anti-aliasing filters are gentle, parameters aren't smoothed yet, and the cl
 
 ## About me
 
-I'm Checo Cadena, a sound artist and creative technologist in New York. I lead the technology at Amorphic Robot Works, work on the technical staff at Berklee NYC, and trained in generative music systems at IRCAM in Paris.
+I'm Checo Cadena, a sound artist and creative technologist in New York. I'm a computer control engineer at Amorphic Robot Works and on the Academic Technology Staff at Berklee NYC, and I trained in generative music systems at IRCAM in Paris.
 
 [checocadena.com](https://checocadena.com) · checo@innercircuit.com
 
