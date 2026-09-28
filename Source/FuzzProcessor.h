@@ -40,12 +40,15 @@
 
 #include <cmath>
 
+// Defined here rather than relying on M_PI, which MSVC only provides with _USE_MATH_DEFINES.
+constexpr double kPi = 3.14159265358979323846;
+
 class Biquad
 {
 public:
     void setLowpass(double sampleRate, double cutoffHz, double q = 0.70710678)
     {
-        double omega = 2.0 * M_PI * cutoffHz / sampleRate;
+        double omega = 2.0 * kPi * cutoffHz / sampleRate;
         double alpha = std::sin(omega) / (2.0 * q);
         double cosw = std::cos(omega);
         double a0 = 1.0 + alpha;
