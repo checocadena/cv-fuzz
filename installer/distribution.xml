@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<installer-gui-script minSpecVersion="2">
+    <title>CV Fuzz</title>
+    <organization>com.checocadena</organization>
+    <domains enable_localSystem="true"/>
+    <options customize="allow" require-scripts="false" hostArchitectures="arm64,x86_64"/>
+    <background file="background.png" mime-type="image/png" alignment="bottomleft" scaling="proportional"/>
+    <background-darkAqua file="background-dark.png" mime-type="image/png" alignment="bottomleft" scaling="proportional"/>
+    <welcome file="welcome.html" mime-type="text/html"/>
+    <conclusion file="conclusion.html" mime-type="text/html"/>
+
+    <choices-outline>
+        <line choice="au"/>
+        <line choice="vst3"/>
+        <line choice="app"/>
+    </choices-outline>
+
+    <choice id="au" title="Audio Unit" description="For Ableton Live, Logic Pro and other AU hosts. Installs to /Library/Audio/Plug-Ins/Components.">
+        <pkg-ref id="com.checocadena.cvfuzz.au"/>
+    </choice>
+    <choice id="vst3" title="VST3" description="For Ableton Live, Bitwig, Reaper and other VST3 hosts. Installs to /Library/Audio/Plug-Ins/VST3.">
+        <pkg-ref id="com.checocadena.cvfuzz.vst3"/>
+    </choice>
+    <choice id="app" title="Standalone app" description="Runs CV Fuzz on its own, using your audio interface as input. Installs to /Applications.">
+        <pkg-ref id="com.checocadena.cvfuzz.app"/>
+    </choice>
+
+    <pkg-ref id="com.checocadena.cvfuzz.au">au.pkg</pkg-ref>
+    <pkg-ref id="com.checocadena.cvfuzz.vst3">vst3.pkg</pkg-ref>
+    <pkg-ref id="com.checocadena.cvfuzz.app">app.pkg</pkg-ref>
+</installer-gui-script>

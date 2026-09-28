@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>CV Fuzz, a fuzz plugin and interactive resume by Checo Cadena</title>
+<meta name="description" content="A C++ fuzz plugin whose interface is my resume. Each knob shapes the sound and opens a different part of my work. AU, VST3 and standalone for macOS." />
+<meta property="og:title" content="CV Fuzz" />
+<meta property="og:description" content="A fuzz plugin and interactive resume by Checo Cadena." />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="https://checocadena.github.io/cv-fuzz/media/overview.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2246%22 fill=%22black%22/><line x1=%2250%22 y1=%2250%22 x2=%2276%22 y2=%2228%22 stroke=%22white%22 stroke-width=%228%22 stroke-linecap=%22round%22/></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800;900&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #000; --white: #fff; --gray: #8c8c8c; --rule: #2e2e2e;
+    --display: "Big Shoulders Display", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+    --body: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+    box-sizing: border-box;
+  }
+  *, *::before, *::after { box-sizing: inherit; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body { margin: 0; background: var(--black); color: var(--white); font: 17px/1.55 var(--body); -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-underline-offset: 3px; }
+  :focus-visible { outline: 2px solid var(--white); outline-offset: 3px; }
+  img, video { max-width: 100%; display: block; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 28px; }
+
+  /* menu bar: the plugin's white header */
+  header { background: var(--white); color: var(--black); position: sticky; top: 0; z-index: 5; padding-top: env(safe-area-inset-top, 0px); }
+  header .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .wordmark { font: 900 34px/1 var(--display); text-decoration: none; }
+  nav { display: flex; gap: 22px; align-items: center; font-weight: 600; font-size: 15px; }
+  nav a { text-decoration: none; }
+  nav a:hover { text-decoration: underline; }
+  .btn { display: inline-block; font: 700 15px var(--body); padding: 12px 20px; text-decoration: none; border: 2px solid currentColor; }
+  .btn.solid { background: var(--white); color: var(--black); border-color: var(--white); }
+  .btn.solid:hover { background: #d9d9d9; border-color: #d9d9d9; }
+  .btn.ghost:hover { background: var(--white); color: var(--black); }
+  header .btn { background: var(--black); color: var(--white); border-color: var(--black); padding: 8px 14px; }
+  header .btn:hover { background: #333; border-color: #333; text-decoration: none; }
+
+  /* hero */
+  .hero { padding-top: 72px; padding-bottom: 56px; }
+  @media (max-width: 520px) { .hero { padding-top: 44px; } }
+  .hero h1 { font: 900 clamp(56px, 10vw, 128px)/0.88 var(--display); margin: 0 0 22px; letter-spacing: 0.005em; }
+  .hero .lede { font-size: clamp(19px, 2.2vw, 24px); line-height: 1.4; max-width: 34ch; margin: 0 0 30px; }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .actions .note { color: var(--gray); font-size: 14px; }
+  .screen { margin-top: 56px; border: 1px solid #3a3a3a; box-shadow: 0 40px 90px -30px rgba(255,255,255,0.12); }
+
+  section { border-top: 1px solid var(--rule); padding: 72px 0; }
+  h2 { font: 900 clamp(38px, 5vw, 56px)/0.95 var(--display); margin: 0 0 14px; }
+  .intro { max-width: 60ch; color: #dcdcdc; margin: 0 0 40px; }
+
+  /* controls: four knob columns, like the deck */
+  .deck { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); background: var(--white); color: var(--black); }
+  .knob { padding: 26px 22px 28px; border-left: 1px solid #ddd; }
+  .knob:first-child { border-left: 0; }
+  .knob h3 { font: 800 30px/1 var(--display); margin: 0 0 4px; }
+  .knob .range { font-size: 14px; font-weight: 600; margin: 0 0 12px; font-variant-numeric: tabular-nums; }
+  .knob p { margin: 0 0 14px; font-size: 15.5px; line-height: 1.45; }
+  .knob .opens { display: inline-block; font-size: 13px; font-weight: 700; background: var(--black); color: var(--white); padding: 2px 8px; }
+
+  /* dsp */
+  .dsp { display: grid; gap: 48px; }
+  .fig { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); gap: 36px; align-items: center; }
+  .fig h3 { font: 800 30px/1 var(--display); margin: 0 0 10px; }
+  .fig p { margin: 0; color: #dcdcdc; }
+  .fig img { background: var(--white); }
+
+  /* install */
+  ol.steps { list-style: none; counter-reset: s; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+  ol.steps li { counter-increment: s; border-top: 3px solid var(--white); padding-top: 14px; }
+  ol.steps li::before { content: counter(s); font: 900 44px/1 var(--display); display: block; margin-bottom: 8px; }
+  .req { color: var(--gray); font-size: 15px; margin-top: 28px; }
+
+  /* downloads */
+  .platforms { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); background: var(--white); color: var(--black); margin-bottom: 56px; }
+  .platform { padding: 26px 22px 28px; border-left: 1px solid #ddd; display: flex; flex-direction: column; }
+  .platform:first-child { border-left: 0; }
+  .platform h3 { font: 800 30px/1 var(--display); margin: 0 0 4px; }
+  .platform .range { font-size: 14px; font-weight: 600; margin: 0 0 12px; }
+  .platform p { margin: 0 0 18px; font-size: 15.5px; line-height: 1.45; }
+  .platform .btn { margin-top: auto; align-self: flex-start; }
+  .platform code { font-size: 14px; }
+  .btn.dark { background: var(--black); color: var(--white); border-color: var(--black); }
+  .btn.dark:hover { background: #333; border-color: #333; }
+  h3.daw { font: 800 30px/1 var(--display); margin: 0 0 20px; }
+
+  /* about */
+  .about { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 36px; align-items: center; }
+  .about img { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; filter: grayscale(1); }
+  .about p { max-width: 58ch; margin: 0 0 12px; }
+  .contact { display: flex; flex-wrap: wrap; gap: 8px 22px; font-weight: 600; }
+
+  footer { border-top: 1px solid var(--rule); padding: 28px 0 calc(28px + env(safe-area-inset-bottom, 0px)); color: var(--gray); font-size: 14px; }
+  footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+
+  @media (max-width: 860px) {
+    nav .hide-sm { display: none; }
+    .deck { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .knob:nth-child(3) { border-left: 0; }
+    .knob:nth-child(n+3) { border-top: 1px solid #ddd; }
+    .fig { grid-template-columns: 1fr; gap: 16px; }
+    ol.steps { grid-template-columns: 1fr; }
+    .platforms { grid-template-columns: 1fr; }
+    .platform { border-left: 0; border-top: 1px solid #ddd; }
+    .platform:first-child { border-top: 0; }
+    .about { grid-template-columns: 1fr; }
+    .about img { width: 120px; height: 120px; }
+  }
+  @media (max-width: 520px) {
+    .wrap { padding-left: 20px; padding-right: 20px; }
+    .deck { grid-template-columns: 1fr; }
+    .knob { border-left: 0; border-top: 1px solid #ddd; }
+    .knob:first-child { border-top: 0; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <a class="wordmark" href="#top">CV Fuzz</a>
+    <nav aria-label="Main">
+      <a href="demo/" class="hide-sm">Try it</a>
+      <a href="#dsp" class="hide-sm">How it works</a>
+      <a data-repo href="#" class="hide-sm">Source</a>
+      <a href="#install" class="btn">Download</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap hero">
+    <h1>CV Fuzz</h1>
+    <p class="lede">A fuzz plugin and interactive resume by Checo Cadena. Each knob shapes the sound and opens a different part of my work.</p>
+    <div class="actions">
+      <a data-dl="auto" href="#install" class="btn solid" id="primaryDl">Download</a>
+      <a href="demo/" class="btn ghost">Try it in your browser</a>
+      <span class="note">Free. macOS, Windows and Linux.</span>
+    </div>
+    <video class="screen" src="media/cv-fuzz-demo.mp4" poster="media/overview.png" autoplay muted loop playsinline controls
+           aria-label="Turning the knobs of CV Fuzz, which flips through sections of the resume, with a guitar playing through the plugin"></video>
+    <p class="note" style="margin-top:10px">Unmute to hear a guitar riff through the C++ core as each knob turns.</p>
+  </div>
+
+  <section id="what">
+    <div class="wrap">
+      <h2>A pedal, then a plugin, then a resume</h2>
+      <p class="intro">At NYU I designed and built a fuzz pedal. CV Fuzz is that circuit rebuilt in C++: asymmetric clipping, a starvable bias stage, 4x oversampling and a tone control, running as an Audio Unit, VST3 and standalone app. The interface is my resume. In modular synths, CV means control voltage, the signal that moves a parameter.</p>
+      <img src="media/cv-fuzz-in-ableton.png" alt="CV Fuzz running as a plugin inside Ableton Live" loading="lazy" />
+    </div>
+  </section>
+
+  <section id="controls">
+    <div class="wrap">
+      <h2>Four knobs, four chapters</h2>
+      <p class="intro">Every control is a real, automatable parameter. The tick marks around each knob are detents, one per entry in its section.</p>
+      <div class="deck">
+        <div class="knob"><h3>Fuzz</h3><p class="range">0 to +35.7 dB</p><p>Drives the input into the clipper. More drive, more of the wave flattens.</p><span class="opens">Projects</span></div>
+        <div class="knob"><h3>Tone</h3><p class="range">500 Hz to 6 kHz</p><p>Blends from a dark, woolly filter to the full bright signal.</p><span class="opens">Experience</span></div>
+        <div class="knob"><h3>Level</h3><p class="range">Output in dB</p><p>Sets the output volume after the tone stage.</p><span class="opens">Education</span></div>
+        <div class="knob"><h3>Bias</h3><p class="range">0 to 100%</p><p>Starves the stage like a dying battery. Tails gate out, hits sputter through.</p><span class="opens">Recognition</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="dsp">
+    <div class="wrap">
+      <h2>How it works</h2>
+      <p class="intro">The DSP is one framework-free C++ class. These plots come from running it on test signals. The full walkthrough, with the math for every stage, is in the <a data-repo-path="blob/main/documentation/DSP.md" href="#">DSP documentation</a>.</p>
+      <div class="dsp">
+        <div class="fig">
+          <div><h3>Asymmetric clipping</h3><p>The clipper flattens at +0.70 on top and -0.46 below. A symmetric clipper only adds odd harmonics. The asymmetry adds even harmonics too, which is what gives fuzz its thick, fizzy character.</p></div>
+          <img src="media/harmonics.png" alt="Spectrum of a 220 Hz sine through CV Fuzz, showing odd harmonics and smaller even harmonics" loading="lazy" />
+        </div>
+        <div class="fig">
+          <div><h3>The transfer curve</h3><p>How input maps to output. Bias shifts the curve and collapses the bottom rail, pushing the stage toward half-wave rectification.</p></div>
+          <img src="media/transfer-curve.png" alt="Transfer curves at 0, 50 and 100 percent bias" loading="lazy" />
+        </div>
+        <div class="fig">
+          <div><h3>Bias on drums</h3><p>Anything quieter than the bias offset gets pinned to one rail and becomes silence. At full Bias, 70% of this drum loop's audible time chokes off while the hits break through.</p></div>
+          <img src="media/bias-drums.png" alt="Drum loop waveforms clean, at 0 percent bias, and at 100 percent bias with gated tails" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="install">
+    <div class="wrap">
+      <h2>Download</h2>
+      <p class="intro">Free, for macOS, Windows and Linux. Each download is the full plugin with the same interface.</p>
+      <div class="platforms">
+        <div class="platform">
+          <h3>macOS</h3>
+          <p class="range">AU, VST3, standalone</p>
+          <p>Signed and notarized by Apple. Native on Apple Silicon and Intel, macOS 11 or later.</p>
+          <a data-dl="CV-Fuzz-macOS.pkg" href="#" class="btn dark">Download .pkg</a>
+        </div>
+        <div class="platform">
+          <h3>Windows</h3>
+          <p class="range">VST3, standalone</p>
+          <p>Windows 10 or 11, 64-bit. Windows may warn about an unrecognized app; choose More info, then Run anyway.</p>
+          <a data-dl="CV-Fuzz-Windows-Setup.exe" href="#" class="btn dark">Download installer</a>
+        </div>
+        <div class="platform">
+          <h3>Linux</h3>
+          <p class="range">VST3, standalone</p>
+          <p>x86-64. Unpack and run <code>install.sh</code>. Needs WebKitGTK 4.1, which the script checks for.</p>
+          <a data-dl="CV-Fuzz-Linux-x64.tar.gz" href="#" class="btn dark">Download .tar.gz</a>
+        </div>
+      </div>
+      <h3 class="daw">Load it in your DAW</h3>
+      <ol class="steps">
+        <li><strong>Install.</strong> On macOS and Windows, run the installer; under Customize you can pick formats.</li>
+        <li><strong>Rescan plugins.</strong> In Ableton Live: Settings &gt; Plug-Ins, turn on Audio Units (Mac) and VST3, then Rescan.</li>
+        <li><strong>Find it</strong> under Checo Cadena &gt; CV Fuzz and drop it on an audio track.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap about">
+      <img src="media/checo.jpg" alt="Portrait of Checo Cadena" loading="lazy" />
+      <div>
+        <h2>Checo Cadena</h2>
+        <p>Sound artist and creative technologist in New York. I lead the technology at Amorphic Robot Works, work on the technical staff at Berklee NYC, and trained in generative music systems at IRCAM in Paris.</p>
+        <p class="contact"><a href="https://checocadena.com">checocadena.com</a><a href="mailto:checo@innercircuit.com">checo@innercircuit.com</a><a data-repo href="#">Source on GitHub</a></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap"><span>CV Fuzz by Checo Cadena</span><span>Source code MIT licensed. Built with JUCE.</span></div>
+</footer>
+
+<script>
+  // Works on any GitHub Pages address: username.github.io/repo/
+  (function () {
+    const host = location.hostname, seg = location.pathname.split("/").filter(Boolean)[0];
+    const repo = host.endsWith("github.io") && seg ? `https://github.com/${host.split(".")[0]}/${seg}` : "https://github.com/checocadena/cv-fuzz";
+    document.querySelectorAll("[data-repo]").forEach(a => a.href = repo);
+    document.querySelectorAll("[data-release]").forEach(a => a.href = repo + "/releases/latest");
+    document.querySelectorAll("[data-repo-path]").forEach(a => a.href = repo + "/" + a.dataset.repoPath);
+    const dl = f => repo + "/releases/latest/download/" + f;
+    document.querySelectorAll("[data-dl]:not([data-dl=auto])").forEach(a => a.href = dl(a.dataset.dl));
+    // The main button offers the file for the visitor's own system.
+    const ua = navigator.userAgent, b = document.getElementById("primaryDl");
+    const pick = /Mac/.test(ua) && !/iPhone|iPad/.test(ua) ? ["macOS", "CV-Fuzz-macOS.pkg"]
+               : /Windows/.test(ua) ? ["Windows", "CV-Fuzz-Windows-Setup.exe"]
+               : /Linux/.test(ua) && !/Android/.test(ua) ? ["Linux", "CV-Fuzz-Linux-x64.tar.gz"] : null;
+    if (pick) { b.textContent = "Download for " + pick[0]; b.href = dl(pick[1]); }
+  })();
+</script>
+</body>
+</html>
