@@ -4,7 +4,7 @@
 
 **A fuzz plugin and interactive resume by Checo Cadena.**
 
-A C++ model of the fuzz pedal I designed and built at NYU. Each knob shapes the sound and opens a different part of my résumé.
+A C++ model of a fuzz pedal I designed and built at NYU. Each knob shapes the sound and opens a different part of my resume.
 
 [**Download**](../../releases/latest) · [**Try it in your browser**](https://checocadena.github.io/cv-fuzz/demo/) · [**Website**](https://checocadena.github.io/cv-fuzz/)
 
