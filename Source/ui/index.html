@@ -26,7 +26,7 @@
   #bar :focus-visible, #deck :focus-visible { outline-color: var(--black); }
   a { color: inherit; }
 
-  #frame { width: 1000px; height: 620px; transform-origin: center center; }
+  #frame { width: 1000px; height: 620px; transform-origin: 0 0; }
   #win { width: 1000px; height: 620px; background: var(--black); display: grid; grid-template-rows: 50px 40px 1fr 140px;
     overflow: hidden; box-shadow: 0 0 0 1px #444, 0 30px 80px rgba(0,0,0,0.6); user-select: none; }
 
@@ -240,7 +240,7 @@ const SECTIONS = [
       what: "A four-limbed inflatable robot by Chico MacMurtrie that moves with fabric muscles and air pressure.",
       facts: [["How", "Bend sensors in its joints and pressure sensors in its feet steer it in real time"],
               ["Sound", "Ceramic casts of the robot whistle with compressed air, after Mesoamerican wind instruments"],
-              ["My role", "Supported modeling of an alternative control system"],
+              ["My role", "Computer control and composition: sensors visitors walk under feed an Arduino, which triggers a Max patch that picks Ableton sequences I composed to play the ceramic flute robots"],
               ["Shown", "Future Tense, Beall Center, UC Irvine, part of Getty's PST ART, fall 2024"]],
       links: [["Project page", L.dual], ["Exhibition", L.future]] },
     { type: "Performance", tl: "Liberation", title: "Liberation Through Amplification", org: "NYU", dates: "2024", short: "2024",
@@ -515,7 +515,12 @@ function frame() {
 // ---------- fit + keys ----------
 function fit() {
   scale = PLUGIN ? 1 : Math.min(window.innerWidth / 1040, window.innerHeight / 660, 1.35);
-  document.getElementById("frame").style.transform = `scale(${scale})`;
+  // Scale from the top-left and shrink the layout box to match, so the body's
+  // grid centring still works when the window is narrower than the frame.
+  const frame = document.getElementById("frame");
+  frame.style.transform = `scale(${scale})`;
+  frame.style.marginRight = `${1000 * (scale - 1)}px`;
+  frame.style.marginBottom = `${620 * (scale - 1)}px`;
   const dpr = (window.devicePixelRatio || 1) * scale;
   sc.width = sc.clientWidth * dpr; sc.height = sc.clientHeight * dpr; drawBlot(); markUI();
 }
