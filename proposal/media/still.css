@@ -1,0 +1,16 @@
+/* Shared by the still images: 1920x1080 pages, captured at 2x by build.py.
+   Palette and type are CV Fuzz's own: Source/ui/index.html (:root) and docs/index.html.
+   Black and white, gray #8c8c8c, rules #333, Big Shoulders Display for headings,
+   Schibsted Grotesk for text. Loaded from Google Fonts, as the plugin does. */
+@import url("https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Schibsted+Grotesk:wght@400;500;600;700&display=block");
+:root {
+  --black: #000; --white: #fff; --gray: #8c8c8c; --rule: #333; --page: #1e1e1e;
+  --display: "Big Shoulders Display", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --body: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: var(--black); color: var(--white);
+  font-family: var(--body); -webkit-font-smoothing: antialiased; }
+.tag { display: inline-block; font: 600 26px/1 var(--body); border: 2px solid currentColor; padding: 6px 14px; }
+.foot { position: absolute; left: 0; right: 0; bottom: 0; height: 64px; display: flex; justify-content: space-between; align-items: center;
+  padding: 0 48px; font: 600 22px/1 var(--body); }

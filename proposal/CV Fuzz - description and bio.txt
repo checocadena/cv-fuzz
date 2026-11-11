@@ -1,0 +1,28 @@
+CV FUZZ
+Checo Cadena, 2026
+Audio plugin, version 1.0.1 (released 28 September 2026) · github.com/checocadena/cv-fuzz
+Website: checocadena.github.io/cv-fuzz · Try it in a browser: checocadena.github.io/cv-fuzz/demo
+
+
+DESCRIPTION (one paragraph)
+
+CV Fuzz is a fuzz plugin whose interface is Checo Cadena's resume. Its sound is a C++ model of a fuzz pedal Checo designed and built at NYU with NYU grant funding: a bias stage that can be starved like a dying battery, up to +35.7 dB of drive, an asymmetric clipper that runs at 4 times the sample rate, a DC blocker, a tone control and an output level. Each of its four knobs also opens one section of the CV: Fuzz opens Projects, Tone opens Experience, Level opens Education and Bias opens Recognition. The name is a pun, since in modular synthesis CV means control voltage. CV Fuzz is built with JUCE 8 as an Audio Unit, VST3 and standalone app for macOS, and as a VST3 and standalone app for Windows and Linux. Version 1.0.1 is a free download from GitHub, and the source code is MIT licensed.
+
+
+SHORT BIO
+
+Checo Cadena is a New York-based singer-songwriter, sound artist and creative technologist from Monterrey, Mexico, who writes and produces records and builds the machines around them: plugins, robots, installations and software. Since 2023 Cadena has been Computer Control Engineer at Amorphic Robot Works, Chico MacMurtrie's robotic sculpture studio. Cadena holds a B.S. in Integrated Design and Media from NYU Tandon and an M.A. in Creative Media and Technology from Berklee NYC.
+
+Contact: Checo Cadena · github.com/checocadena · checocadena.com
+
+
+STILL OPEN
+
+- The pedal: the repository says only that it was designed and built at NYU with NYU grant funding. Not in the repository: the grant's name and year, the pedal's name, its circuit and controls (and whether it had a Bias control), and a photo of it.
+- No press, users, reviews or performances with the plugin are in the repository, so the kit claims none.
+- The released build (v1.0.1, tag at commit 954b5f5) predates the last change on main (8c5c8ef, 30 September 2026), which rewrote the "My role" line of the Dual Pneuma entry and fixed the layout in small windows. A new release is needed for the downloadable plugin to show the current CV text.
+- The Ableton Live screenshot (docs/media/cv-fuzz-in-ableton.png, image 2) shows the older "Print resume" button; the current interface says "Resume PDF". A fresh capture in a DAW would match the current build.
+- The Windows and Linux builds come from GitHub Actions. The repository does not say whether they were tried on real Windows or Linux machines.
+- The kit has no photo of Checo or of the hardware pedal. docs/media/checo.jpg is only 480 x 480 px, too small to supply as a press photo.
+- The demo video (docs/media/cv-fuzz-demo.mp4, 35 seconds) is only in the repository and on the website; there is no separate public video link.
+- The bio was given for this kit. Check it is still current.

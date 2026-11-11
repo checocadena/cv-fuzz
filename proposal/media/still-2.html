@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>CV Fuzz · still 2 · in Ableton Live</title>
+<link rel="stylesheet" href="still.css">
+<style>
+  /* The repository's own screenshot of the plugin in Ableton Live (docs/media/cv-fuzz-in-ableton.png,
+     2092 x 1370), shown at 1046 x 685 CSS px so the 2x capture uses it at its native resolution, no upscaling.
+     Layout borrows the plugin: entry tag, Big Shoulders title, gray fact labels, white deck strip at the bottom. */
+  .txt { position: absolute; left: 72px; top: 92px; width: 680px; }
+  h1 { font: 900 112px/0.9 var(--display); margin: 26px 0 18px; }
+  .what { font: 30px/1.4 var(--body); margin: 0 0 34px; }
+  dl { display: grid; grid-template-columns: 150px 1fr; gap: 14px 22px; margin: 0; font: 25px/1.4 var(--body); }
+  dt { color: var(--gray); } dd { margin: 0; }
+  .shot { position: absolute; right: 72px; top: 150px; width: 1046px; height: 685px; display: block; }
+  .foot { background: var(--white); color: var(--black); height: 96px; }
+  .foot b { font: 800 40px/1 var(--display); }
+</style></head>
+<body>
+<div class="txt">
+  <span class="tag">Plugin</span>
+  <h1>Running in<br>Ableton Live</h1>
+  <p class="what">A fuzz plugin whose interface is a resume. Each knob shapes the sound and opens one section of it.</p>
+  <!-- Formats: CMakeLists.txt (CVFUZZ_FORMATS). Knobs and sections: README.md "Controls" and Source/ui/index.html SECTIONS.
+       Automation: documentation/ARCHITECTURE.md "Parameters and automation". -->
+  <dl>
+    <dt>Formats</dt><dd>AU, VST3 and standalone on macOS. VST3 and standalone on Windows and Linux.</dd>
+    <dt>Knobs</dt><dd>Fuzz, Tone, Level, Bias. Each one opens Projects, Experience, Education or Recognition.</dd>
+    <dt>In the DAW</dt><dd>All four knobs are automatable. Automating one moves it on screen.</dd>
+  </dl>
+</div>
+<img class="shot" src="../../docs/media/cv-fuzz-in-ableton.png" alt="CV Fuzz open as a plugin window in Ableton Live">
+<div class="foot"><b>CV Fuzz</b><span>Checo Cadena · 2026 · github.com/checocadena/cv-fuzz</span></div>
+</body></html>

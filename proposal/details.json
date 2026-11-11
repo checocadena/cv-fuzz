@@ -1,0 +1,17 @@
+{
+  "title": "CV Fuzz",
+  "pdf": "CV-Fuzz-press-kit.pdf",
+  "stills": ["media/still-1.html", "media/still-2.html", "media/still-3.html"],
+  "fields": {
+    "ARTIST": "Checo Cadena",
+    "YEAR": "2026",
+    "CONTACT": "github.com/checocadena",
+    "WEBSITE": "checocadena.com",
+    "REPO_URL": "github.com/checocadena/cv-fuzz",
+    "SITE_URL": "checocadena.github.io/cv-fuzz",
+    "DEMO_URL": "checocadena.github.io/cv-fuzz/demo",
+    "VERSION": "1.0.1",
+    "RELEASED": "28 September 2026",
+    "CHECKED": "11 November 2026"
+  }
+}

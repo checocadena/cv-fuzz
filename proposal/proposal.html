@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CV Fuzz · Press kit</title>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Schibsted+Grotesk:wght@400;500;600;700&display=block" rel="stylesheet">
+<style>
+  /* Printed with Chrome: see proposal/build.py. Letter, no browser margins.
+     The look is CV Fuzz's own. Palette, fonts and parts come from the plugin interface
+     (Source/ui/index.html: black and white, gray #8c8c8c, rules #333, Big Shoulders Display and
+     Schibsted Grotesk, the white menu bar with wordmark and black preset box, the tab row, the
+     entry tag, the gray fact labels, the black knobs on the white deck), the website (docs/index.html)
+     and the installer background (installer/resources/background.png: white, "CV Fuzz" stacked bottom left). */
+  @page { size: 8.5in 11in; margin: 0; }
+  :root {
+    --black: #000; --white: #fff; --gray: #8c8c8c; --rule: #333; --soft: #d0d0d0;
+    --display: "Big Shoulders Display", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+    --body: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #000; }
+  body { font-family: var(--body); color: var(--white); -webkit-print-color-adjust: exact; print-color-adjust: exact; -webkit-font-smoothing: antialiased; }
+  .page { width: 8.5in; height: 11in; position: relative; overflow: hidden; background: var(--black);
+    page-break-after: always; break-after: page; padding: 1.55in 0.7in 0.75in; }
+  .page:last-child { page-break-after: auto; break-after: auto; }
+
+  /* The plugin's menu bar and tab row, used as the page header. */
+  .bar { position: absolute; left: 0; right: 0; top: 0; height: 0.62in; background: var(--white); color: var(--black);
+    display: grid; grid-template-columns: 1.6in 1fr 1.6in; align-items: center; padding: 0 0.2in; }
+  .bar .wm { font: 900 25pt/1 var(--display); }
+  .bar .box { justify-self: center; width: 3.1in; height: 0.3in; background: var(--black); color: var(--white); font: 600 9.5pt/0.3in var(--body);
+    padding: 0 0.12in; position: relative; }
+  .bar .box::after { content: ""; position: absolute; right: 0.12in; top: 0.12in; border: 4px solid transparent; border-top: 5px solid #fff; }
+  .bar .who { justify-self: end; font: 600 9pt/1 var(--body); text-decoration: underline; text-underline-offset: 3px; }
+  .tabs { position: absolute; left: 0; right: 0; top: 0.62in; height: 0.42in; display: grid; grid-template-columns: repeat(5, 1fr);
+    border-bottom: 1px solid var(--rule); }
+  .tabs span { font: 600 9pt/0.42in var(--body); color: var(--gray); text-align: center; position: relative; }
+  .tabs span.on { color: var(--white); }
+  .tabs span.on::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 3px; background: var(--white); }
+  .folio { position: absolute; left: 0.7in; right: 0.7in; bottom: 0.4in; display: flex; justify-content: space-between;
+    font: 600 8pt/1 var(--body); color: var(--gray); }
+
+  h2 { font: 900 34pt/0.95 var(--display); margin: 0 0 0.16in; }
+  h3 { font: 800 15pt/1 var(--display); margin: 0 0 0.06in; padding-bottom: 0.05in; border-bottom: 1px solid var(--rule); }
+  .tag { display: inline-block; font: 600 8pt/1 var(--body); border: 1px solid var(--white); padding: 2px 6px; margin-bottom: 0.1in; }
+  p { font-size: 10.3pt; line-height: 1.5; margin: 0 0 0.13in; max-width: 6.3in; color: var(--soft); }
+  p b { color: var(--white); font-weight: 600; }
+  .lede { font: 500 15.5pt/1.32 var(--body); color: var(--white); max-width: 6.6in; margin-bottom: 0.22in; }
+  .small { font-size: 9pt; line-height: 1.5; }
+  .mono { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.9em; white-space: nowrap; }
+  a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+  img { display: block; }
+  .gap { font: 8.5pt/1.5 var(--body); border: 1.5px dashed var(--white); color: var(--white); padding: 0.08in 0.12in; max-width: 6.6in; margin: 0.12in 0; }
+  .gap b { font-weight: 700; }
+
+  /* Facts: the plugin's entry layout, gray labels on the left. */
+  dl.facts { display: grid; grid-template-columns: 1.25in 1fr; gap: 0.07in 0.16in; margin: 0; font-size: 9.6pt; line-height: 1.45; }
+  dl.facts dt { color: var(--gray); } dl.facts dd { margin: 0; color: var(--white); }
+  dl.facts.rules dt, dl.facts.rules dd { border-top: 1px solid var(--rule); padding-top: 0.07in; }
+
+  /* Cover: the installer background, with the plugin's knob deck. */
+  .cover { background: var(--white); color: var(--black); padding: 0.7in; }
+  .cover .top { display: flex; justify-content: space-between; font: 600 10pt/1.4 var(--body); }
+  .cover .deck { position: absolute; left: 0.7in; right: 0.7in; top: 2.3in; display: grid; grid-template-columns: repeat(4, 1fr); }
+  .cover .k { display: flex; flex-direction: column; align-items: center; gap: 0.08in; }
+  .cover .k b { font: 800 19pt/1 var(--display); }
+  .cover .k span { font: 600 8.5pt/1 var(--body); }
+  .cover .line { position: absolute; left: 0.7in; right: 0.7in; top: 4.25in; font: 500 17pt/1.35 var(--body); max-width: 6.2in; }
+  .cover .wm { position: absolute; left: 0.62in; bottom: 0.55in; font: 900 150pt/0.8 var(--display); letter-spacing: 0.005em; }
+  .cover .by { position: absolute; right: 0.7in; bottom: 0.7in; text-align: right; font: 600 10pt/1.5 var(--body); }
+
+  /* The CV page: the plugin's Overview, as columns. */
+  .knobmap { display: grid; grid-template-columns: repeat(4, 1fr); background: var(--white); color: var(--black); margin: 0.05in 0 0.28in; }
+  .knobmap div { padding: 0.12in 0.14in 0.14in; border-left: 1px solid #ddd; }
+  .knobmap div:first-child { border-left: 0; }
+  .knobmap b { display: block; font: 800 17pt/1 var(--display); }
+  .knobmap span { display: block; font: 600 8.3pt/1.35 var(--body); margin-top: 0.03in; }
+  .knobmap i { display: inline-block; font: 700 8pt/1 var(--body); font-style: normal; background: var(--black); color: var(--white); padding: 2px 6px; margin-top: 0.07in; }
+  .cvcols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.26in; }
+  .row { margin: 0 0 0.075in; }
+  .row b { display: block; font-size: 9.6pt; font-weight: 600; line-height: 1.25; }
+  .row span { display: block; font-size: 8.4pt; color: var(--gray); line-height: 1.35; }
+  .projs { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.12in; margin-top: 0.06in; }
+  .projs .row { border-top: 3px solid var(--white); padding-top: 0.05in; }
+
+  .diagram { margin: 0.02in 0 0.22in; }
+  .diagram svg { width: 100%; height: auto; display: block; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0.3in; }
+  .cols p { font-size: 9.2pt; line-height: 1.48; margin-bottom: 0.1in; }
+
+  .stills { display: grid; grid-template-columns: 1fr 1fr; gap: 0.25in 0.2in; }
+  .stills figure { margin: 0; }
+  .stills figure.wide { grid-column: 1 / 3; }
+  .stills img { width: 100%; height: auto; border: 1px solid var(--rule); }
+  .stills figcaption { font: 8pt/1.4 var(--body); margin-top: 0.05in; color: var(--gray); max-width: 6.4in; }
+  .stills figcaption b { color: var(--white); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<!-- 1. Cover: installer/resources/background.png (white, "CV Fuzz" stacked bottom left) plus the plugin's deck. -->
+<section class="page cover">
+  <div class="top"><span>Press kit</span><span>Audio plugin · version {{VERSION}}</span></div>
+  <!-- Knob names, readouts and sections: README.md "Controls" and Source/ui/index.html. -->
+  <div class="deck">
+    <div class="k"><b>Fuzz</b><svg width="86" height="86" viewBox="0 0 76 76"><circle cx="38" cy="38" r="38"/><path d="M 20.3 55.7 A 25 25 0 1 1 55.7 55.7" stroke="#333" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M 20.3 55.7 A 25 25 0 0 1 13.4 33.7" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/><line x1="38" y1="38" x2="17.6" y2="43" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg><span>0 to +35.7 dB</span></div>
+    <div class="k"><b>Tone</b><svg width="86" height="86" viewBox="0 0 76 76"><circle cx="38" cy="38" r="38"/><path d="M 20.3 55.7 A 25 25 0 1 1 55.7 55.7" stroke="#333" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M 20.3 55.7 A 25 25 0 0 1 14.6 29.2" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/><line x1="38" y1="38" x2="17.4" y2="34.6" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg><span>500 Hz to 6 kHz</span></div>
+    <div class="k"><b>Level</b><svg width="86" height="86" viewBox="0 0 76 76"><circle cx="38" cy="38" r="38"/><path d="M 20.3 55.7 A 25 25 0 1 1 55.7 55.7" stroke="#333" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M 20.3 55.7 A 25 25 0 0 1 38 13" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/><line x1="38" y1="38" x2="38" y2="17" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg><span>output in dB</span></div>
+    <div class="k"><b>Bias</b><svg width="86" height="86" viewBox="0 0 76 76"><circle cx="38" cy="38" r="38"/><path d="M 20.3 55.7 A 25 25 0 1 1 55.7 55.7" stroke="#333" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M 20.3 55.7 A 25 25 0 0 1 13 37.1" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/><line x1="38" y1="38" x2="17" y2="37.5" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg><span>0 to 100%</span></div>
+  </div>
+  <div class="line">A fuzz plugin and interactive resume. Each knob shapes the sound and opens a different part of the CV.</div>
+  <div class="wm">CV<br>Fuzz</div>
+  <div class="by">{{ARTIST}}<br>{{YEAR}}</div>
+</section>
+
+<!-- 2. What it is -->
+<section class="page">
+  <div class="bar"><span class="wm">CV Fuzz</span><span class="box">What it is</span><span class="who">{{ARTIST}}</span></div>
+  <div class="tabs"><span class="on">What it is</span><span>The CV</span><span>How it works</span><span>Images</span><span>Setup</span></div>
+  <span class="tag">Plugin</span>
+  <h2>What it is</h2>
+  <p class="lede">CV Fuzz is a fuzz plugin whose interface is Checo Cadena's resume. Each of its four knobs shapes the sound and opens one section of the CV.</p>
+  <!-- Pedal and grant: README.md ("A C++ model of a fuzz pedal I designed and built at NYU"),
+       Source/PluginProcessor.h ("NYU-grant hardware fuzz pedal"), Source/ui/index.html (CV Fuzz entry: "the fuzz pedal I built on an NYU grant";
+       B.S. entry, Grant: "NYU funding to design and build the fuzz pedal that became CV Fuzz").
+       Numbers: +35.7 dB = 20*log10(1 + 60), Source/FuzzProcessor.h and documentation/DSP.md. -->
+  <p><b>The sound</b> is a C++ model of a fuzz pedal Checo designed and built at NYU, with NYU grant funding. The signal goes through a bias stage that can be starved like a dying battery, up to +35.7 dB of drive, an asymmetric clipper that runs at 4 times the sample rate, a DC blocker, a tone control and an output level.</p>
+  <!-- Knob to section: README.md "Controls". CV pun: README.md "What it is". -->
+  <p><b>The interface is the CV.</b> Turning a knob changes the sound and flips through one section: Fuzz opens Projects, Tone opens Experience, Level opens Education and Bias opens Recognition. The tick marks around each knob are detents, one per entry. The name is a pun: in modular synthesis, CV means control voltage, the signal that moves a parameter.</p>
+  <!-- JUCE 8 web view, formats: CMakeLists.txt, documentation/ARCHITECTURE.md. -->
+  <p><b>How it is made.</b> CV Fuzz is built with JUCE 8 as an Audio Unit, a VST3 and a standalone app. The interface is a web page running inside the plugin window and bound to the real C++ parameters, so automation and saved sessions work as usual. The same page runs in a browser with a Web Audio approximation of the sound, which is the online demo.</p>
+  <!-- Version: CMakeLists.txt project(CVFuzz VERSION 1.0.1). Release: gh release list --repo checocadena/cv-fuzz (v1.0.1, 2026-09-28, three files).
+       Free: docs/index.html ("Free. macOS, Windows and Linux."). Limits: README.md "Known limitations", documentation/DSP.md. -->
+  <p><b>Stage:</b> version {{VERSION}}, released on GitHub on {{RELEASED}} with installers for macOS, Windows and Linux. It is free and the source code is MIT licensed. The repository lists its own limits: the anti-aliasing filters are gentle, parameters are not smoothed yet, and the clipper is a tuned waveshaper, not a component-level model of the original pedal's circuit.</p>
+  <div class="gap"><b>TO CONFIRM (Checo):</b> the pedal. The repository says only that it was designed and built at NYU with NYU grant funding. The grant's name and year, the pedal's name, its circuit and controls, and a photo of it are not in the repository.</div>
+  <div class="gap"><b>TO CONFIRM (Checo):</b> press, users or performances with the plugin. None are in the repository, so none are claimed here.</div>
+  <div class="folio"><span>CV Fuzz · Press kit</span><span>2</span></div>
+</section>
+
+<!-- 3. The CV inside. Every title, organization and date below is copied from SECTIONS in Source/ui/index.html (main, checked {{CHECKED}}). -->
+<section class="page">
+  <div class="bar"><span class="wm">CV Fuzz</span><span class="box">The CV</span><span class="who">{{ARTIST}}</span></div>
+  <div class="tabs"><span>What it is</span><span class="on">The CV</span><span>How it works</span><span>Images</span><span>Setup</span></div>
+  <span class="tag">Resume</span>
+  <h2>Four knobs, four chapters</h2>
+  <p class="small" style="color:var(--gray);margin-bottom:0.14in">As the plugin shows it. Turning a knob steps through the entries of its section.</p>
+  <div class="knobmap">
+    <div><b>Fuzz</b><span>Drive, 0 to +35.7 dB</span><i>Projects</i></div>
+    <div><b>Tone</b><span>500 Hz to 6 kHz</span><i>Experience</i></div>
+    <div><b>Level</b><span>Output volume in dB</span><i>Education</i></div>
+    <div><b>Bias</b><span>Starves the stage, 0 to 100%</span><i>Recognition</i></div>
+  </div>
+  <div class="cvcols">
+    <div><h3>Experience</h3>
+      <div class="row"><b>Computer Control Engineer</b><span>Amorphic Robot Works, 2023 to now</span></div>
+      <div class="row"><b>Academic Technology Staff</b><span>Berklee NYC, 2026 to now</span></div>
+      <div class="row"><b>Project Manager</b><span>Aerial Entertainment, 2026 to now</span></div>
+    </div>
+    <div><h3>Education</h3>
+      <div class="row"><b>M.A., Creative Media and Technology</b><span>Berklee NYC, 2025 to 2026</span></div>
+      <div class="row"><b>Generative music agents</b><span>IRCAM, Paris, Feb 2025</span></div>
+      <div class="row"><b>B.S., Integrated Design and Media</b><span>NYU Tandon School of Engineering, 2020 to 2024</span></div>
+    </div>
+    <div><h3>Recognition</h3>
+      <div class="row"><b>Superstar EP</b><span>Checo Cadena, Jan 2025</span></div>
+      <div class="row"><b>Arts Incubator Fellow</b><span>NYU Production Lab, Oct 2024</span></div>
+      <div class="row"><b>Tidal Shift Award</b><span>Portland Museum of Art, Dec 2023</span></div>
+    </div>
+  </div>
+  <div style="margin-top:0.2in"><h3>Projects</h3>
+    <div class="projs">
+      <div class="row"><b>CV Fuzz</b><span>Plugin · 2026</span></div>
+      <div class="row"><b>ONE/EIGHT iPod Nano</b><span>Installation · 2026</span></div>
+      <div class="row"><b>Dual Pneuma</b><span>Robotic art · 2024</span></div>
+      <div class="row"><b>Liberation Through Amplification</b><span>Performance · 2024</span></div>
+      <div class="row"><b>Vida</b><span>Film score · 2024</span></div>
+    </div>
+  </div>
+  <div style="margin-top:0.2in"><h3>Skills</h3>
+    <!-- SKILLS in Source/ui/index.html buildOverview. -->
+    <dl class="facts" style="grid-template-columns:0.9in 1fr;margin-top:0.08in">
+      <dt>Code</dt><dd>C++, JUCE, Max/MSP, agentic coding</dd>
+      <dt>Audio</dt><dd>Ableton Live, Pro Tools, Logic Pro X</dd>
+      <dt>Sound</dt><dd>Spatial audio, synthesis, installations</dd>
+      <dt>Hardware</dt><dd>Pedal building, sensors, MIDI</dd>
+    </dl>
+  </div>
+  <p class="small" style="margin-top:0.2in">Each entry opens a page with one plain sentence, a few labeled facts and links. The Resume PDF button opens a PDF of the resume bundled inside the plugin.</p>
+  <div class="gap"><b>TO CONFIRM (Checo):</b> the released build (v{{VERSION}}) predates the last change on main, which rewrote the "My role" line of the Dual Pneuma entry. A new release is needed for the downloadable plugin to show the current text.</div>
+  <div class="folio"><span>CV Fuzz · Press kit</span><span>3</span></div>
+</section>
+
+<!-- 4. How it works. Every number is from Source/FuzzProcessor.h and documentation/DSP.md unless noted. -->
+<section class="page">
+  <div class="bar"><span class="wm">CV Fuzz</span><span class="box">How it works</span><span class="who">{{ARTIST}}</span></div>
+  <div class="tabs"><span>What it is</span><span>The CV</span><span class="on">How it works</span><span>Images</span><span>Setup</span></div>
+  <span class="tag">DSP</span>
+  <h2>The signal path</h2>
+  <div class="diagram">{{SIGNAL_SVG}}</div>
+  <div class="cols">
+    <div>
+      <!-- Bias: setBias in FuzzProcessor.h; drum loop figures (39%, 70%, Fuzz 60%): documentation/DSP.md section 1. -->
+      <p><b>Bias</b> models a starved transistor. It adds an offset before the drive, so anything quieter than the offset sits on one side of the clipper and the DC blocker turns it into silence: tails choke off and loud hits sputter through. At full Bias the bottom rail also drops from 0.46 to about 0.07. On a synthesized drum loop at Fuzz 60%, 39% of the audible time chokes to near-silence at half Bias and 70% at full Bias.</p>
+      <!-- Clipper and harmonics: DSP.md section 3. -->
+      <p><b>The clipper</b> uses tanh on each half of the wave, flattening at +0.70 on top and -0.46 below. A symmetric clipper makes only odd harmonics. The asymmetry adds even ones, which give fuzz its thicker sound. With a pure 220 Hz sine, the even harmonics sit about 35 dB below the fundamental.</p>
+    </div>
+    <div>
+      <!-- Oversampling: DSP.md section 4 (Butterworth at 0.45x). DC blocker: section 5. Tone: section 6. -->
+      <p><b>Oversampling.</b> The clipper runs at 4 times the sample rate, between two second-order Butterworth lowpass filters at 0.45 times the original rate, to reduce aliasing.</p>
+      <p><b>Tone and Level.</b> Tone crossfades between the signal and a lowpassed copy whose cutoff rises from 500 Hz to 6 kHz, a simple stand-in for a pedal's passive tone network. Level is the output gain.</p>
+      <!-- Architecture: documentation/ARCHITECTURE.md; 4,096 samples and 220 points: PluginProcessor.h, PluginEditor.cpp. -->
+      <p><b>Architecture.</b> The DSP is one C++ class with no framework dependency. The interface is one HTML file compiled into the plugin, so it never needs network access. A lock-free ring buffer of 4,096 samples feeds the oscilloscope on every display refresh.</p>
+    </div>
+  </div>
+  <!-- DSP.md "Verification" and "Known limitations and roadmap". -->
+  <p class="small" style="max-width:7.1in;margin-top:0.04in"><b>Tested with</b> a standalone C++ harness that renders a pure sine, a synthesized plucked-string riff, a sine sweep from 80 Hz to 2 kHz and a synthesized drum loop, analyzed in Python. <b>Next steps listed in the repository:</b> steeper anti-aliasing, parameter smoothing, a DC blocker that follows the sample rate, a circuit-level model of the original pedal, and an RNBO version.</p>
+  <div class="folio"><span>CV Fuzz · Press kit</span><span>4</span></div>
+</section>
+
+<!-- 5. Images -->
+<section class="page">
+  <div class="bar"><span class="wm">CV Fuzz</span><span class="box">Images</span><span class="who">{{ARTIST}}</span></div>
+  <div class="tabs"><span>What it is</span><span>The CV</span><span>How it works</span><span class="on">Images</span><span>Setup</span></div>
+  <h2>Images</h2>
+  <div class="stills">
+    <figure class="wide"><img src="{{IMG1}}" alt="The CV Fuzz interface on its Overview page"><figcaption><b>1 · The interface.</b> The plugin's own interface file (Source/ui/index.html), rendered at high resolution on its Overview page.</figcaption></figure>
+    <figure><img src="{{IMG2}}" alt="CV Fuzz running as a plugin in Ableton Live"><figcaption><b>2 · In Ableton Live.</b> The repository's screenshot (docs/media), shown at its native resolution. It was taken before the "Print resume" button was renamed "Resume PDF".</figcaption></figure>
+    <figure><img src="{{IMG3}}" alt="Transfer curve of the clipper at Bias 0, 50 and 100 percent"><figcaption><b>3 · Transfer curve.</b> Redrawn from the formulas in Source/FuzzProcessor.h, after the repository's plot.</figcaption></figure>
+  </div>
+  <p class="small" style="color:var(--gray);margin-top:0.25in">Supplied as 3840 × 2160 JPEGs with this kit. Images 1 and 2 are real captures of the plugin; image 3 is a chart computed from its code.</p>
+  <div class="folio"><span>CV Fuzz · Press kit</span><span>5</span></div>
+</section>
+
+<!-- 6. Setup and links -->
+<section class="page">
+  <div class="bar"><span class="wm">CV Fuzz</span><span class="box">Setup and links</span><span class="who">{{ARTIST}}</span></div>
+  <div class="tabs"><span>What it is</span><span>The CV</span><span>How it works</span><span>Images</span><span class="on">Setup</span></div>
+  <h2>Setup and links</h2>
+  <!-- Platforms and files: README.md "Install", CMakeLists.txt (formats, macOS 11.0, arm64;x86_64), .github/workflows/release.yml,
+       installer/linux/install.sh, installer/windows/cvfuzz.iss. Release files: gh release view v1.0.1. -->
+  <dl class="facts rules">
+    <dt>Version</dt><dd>{{VERSION}}, released {{RELEASED}}.<br>Download from <span class="mono">{{REPO_URL}}/releases/latest</span></dd>
+    <dt>macOS</dt><dd>macOS 11 or later, Apple Silicon and Intel. <span class="mono">CV-Fuzz-macOS.pkg</span>, signed and notarized. Audio Unit, VST3 and standalone app; the installer lets you pick which.</dd>
+    <dt>Windows</dt><dd>Windows 10 or 11, 64-bit. <span class="mono">CV-Fuzz-Windows-Setup.exe</span>: VST3 and standalone app. The installer is not code-signed, so SmartScreen may warn: choose More info, then Run anyway.</dd>
+    <dt>Linux</dt><dd>x86-64. <span class="mono">CV-Fuzz-Linux-x64.tar.gz</span>, then run <span class="mono">install.sh</span>: VST3 in <span class="mono">~/.vst3</span>, standalone as <span class="mono">cv-fuzz</span>. Needs WebKitGTK 4.1.</dd>
+    <dt>In a DAW</dt><dd>In Ableton Live: Settings &gt; Plug-Ins, turn on Audio Units (Mac) and VST3, then Rescan. CV Fuzz is under Checo Cadena.</dd>
+    <dt>From source</dt><dd><span class="mono">./build-mac.sh</span> on a Mac with Xcode Command Line Tools and CMake. JUCE 8.0.4 is downloaded automatically. Windows and Linux builds run on GitHub Actions.</dd>
+    <!-- LICENSE file, as written. -->
+    <dt>License</dt><dd>The source code is under the MIT License, copyright 2026 Sergio Cadena Gonzalez (Checo Cadena). It does not cover the resume content, photographs or the resume PDF, which remain the property of Checo Cadena. JUCE is licensed separately under its own terms.</dd>
+  </dl>
+  <div class="gap"><b>TO CONFIRM (Checo):</b> the Windows and Linux builds come from GitHub Actions. The repository does not say whether they were tried on a Windows or Linux machine.</div>
+  <p class="small" style="margin-top:0.16in"><b>Website:</b> <a class="mono" href="https://{{SITE_URL}}">{{SITE_URL}}</a> · <b>Try it in a browser:</b> <a class="mono" href="https://{{DEMO_URL}}/">{{DEMO_URL}}</a><br><b>Code:</b> <a class="mono" href="https://{{REPO_URL}}">{{REPO_URL}}</a> · <b>Demo video:</b> <span class="mono">docs/media/cv-fuzz-demo.mp4</span> in the repository (35 seconds)</p>
+  <h3 style="margin-top:0.2in">About the artist</h3>
+  <p class="small" style="max-width:7.1in;margin-top:0.08in">Checo Cadena is a New York-based singer-songwriter, sound artist and creative technologist from Monterrey, Mexico, who writes and produces records and builds the machines around them: plugins, robots, installations and software. Since 2023 Cadena has been Computer Control Engineer at Amorphic Robot Works, Chico MacMurtrie's robotic sculpture studio. Cadena holds a B.S. in Integrated Design and Media from NYU Tandon and an M.A. in Creative Media and Technology from Berklee NYC.</p>
+  <p class="small"><b>Contact:</b> {{ARTIST}} · <a class="mono" href="https://{{CONTACT}}">{{CONTACT}}</a> · <a class="mono" href="https://{{WEBSITE}}">{{WEBSITE}}</a></p>
+  <div class="folio"><span>CV Fuzz · Press kit</span><span>6</span></div>
+</section>
+
+</body>
+</html>
